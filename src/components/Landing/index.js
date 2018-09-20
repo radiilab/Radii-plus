@@ -2,6 +2,11 @@ import React from 'react';
 import { auth } from '../../firebase';
 
 import * as routes from '../../constants/routes';
+import withAuthorization from '../Session/withAuthorization'
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import {  Redirect } from 'react-router-dom';
 
 const style = {
   'max-width':'1400px',
@@ -17,10 +22,10 @@ const style = {
   handleGoogleSignin = (event) => {
     auth.doGoogleSignIn().then( ()=>{
       // redirect to the home route
-      window.location.assign(routes.HOME);
+      <Redirect to={routes.HOME} />
 
     }).catch( (reason)=> {
-      console.log("error login ::"+ reason);
+      console.log("error login :: "+ reason);
     })
      
    }

@@ -1,12 +1,15 @@
 import React from 'react';
-
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 //import SignOut from '../SignOut';
 import * as routes from '../../constants/routes';
 import { auth } from '../../firebase'
 
 
+import { 
+userLogoutAction
+} from '../../actions/defActions'
   
 
 const styles = {
@@ -24,8 +27,8 @@ const styles = {
 const Navigation = ({ authUser }) =>
   <div>
     { authUser
-        ? <NavigationAuth />
-        : <NavigationNonAuth />
+        ? <NavigationAuth/>
+        : <NavigationNonAuth/>
     }
   </div>
 
@@ -42,9 +45,9 @@ const NavigationAuth = () =>
   </a>
   </div>
   <div class="w3-col s3">
-      <a href="#" className="w3-bar-item w3-button w3-left">
-      <i className="fa fa-search"></i>
-      </a>
+      <Link to={routes.HOME} className="w3-bar-item w3-button w3-left">
+      HOME
+      </Link>
   </div>
   <div className="w3-col s3">
       <a href="#" 
@@ -60,7 +63,7 @@ const NavigationAuth = () =>
        class="w3-col s3"
        ><i class="fas fa-hand-point-down" title="Options"></i></a>
     </div>
-    </div>
+</div>
 
 
 
@@ -89,6 +92,12 @@ const mapStateToProps = (state) => ({
   authUser: state.sessionState.authUser,
 });
 
-export default connect(mapStateToProps)(Navigation);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    userLogoutAction 
+}, dispatch);
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
 
 

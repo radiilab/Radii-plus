@@ -34,7 +34,7 @@ export function assemblageFeedDockletAction(someValue) {
           snapshot.forEach(doc => {
         console.log("Parent Document ID: ", doc.id);
 
-        let subCollectionDocs = firestore.AssembladgeFeedDockletRef.doc(doc.id).get()
+         firestore.AssembladgeFeedDockletRef.doc(doc.id).get()
           .then(snapshot => {
               console.log("Sub Document ID: ", doc.id);
               console.log("Sub Document Data: ", doc.data());
@@ -55,4 +55,10 @@ export function assemblageFeedDockletAction(someValue) {
         }
         )   
     };
+}
+
+export function userLogoutAction(){
+  return (dispatch, getState) => {
+    dispatch({type:'RESET_POST_STATE'})
+  }
 }

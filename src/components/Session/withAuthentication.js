@@ -11,7 +11,7 @@ const withAuthentication = (Component) => {
       firebase.auth.onAuthStateChanged(authUser => {
         authUser
           ? onSetAuthUser(authUser)
-          : onSetAuthUser(null);
+          : ( onSetAuthUser(null), this.props.onSetUserNull() )
       });
     }
 
@@ -24,6 +24,7 @@ const withAuthentication = (Component) => {
 
   const mapDispatchToProps = (dispatch) => ({
     onSetAuthUser: (authUser) => dispatch({ type: 'AUTH_USER_SET', authUser }),
+    onSetUserNull: () => dispatch ({type: 'RESET_POST_STATE'})
   });
 
   return connect(null, mapDispatchToProps)(WithAuthentication);

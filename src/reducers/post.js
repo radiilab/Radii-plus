@@ -14,6 +14,12 @@ const applyAddDocklet = (state, action) => ({
   ...state, // destructuring es6
   docklets: [...state.docklets , action.payload] 
 });
+const resetState = (state, action) => ({
+  ...state, // destructuring es6
+  docklets: [] 
+});
+
+
 function postReducer(state = INITIAL_STATE, action) {
   switch(action.type) {
     case 'PROJECTS' : {
@@ -36,6 +42,12 @@ function postReducer(state = INITIAL_STATE, action) {
     case 'DOCKLET_FOUND':{
       console.log("adding docklet to state", action)
       return applyAddDocklet(state, action);
+    };
+    break;
+    case 'RESET_POST_STATE':{
+      
+      console.log("reset the array ... user not available")
+      return resetState(state, action);
     };
     break;
     default : return state;
