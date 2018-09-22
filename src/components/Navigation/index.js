@@ -69,7 +69,7 @@ const NavigationAuth = () =>
 
 
 const NavigationNonAuth = () =>
-<div className="w3-row w3-padding w3-theme-d2 ">
+<div className="w3-row w3-padding w3-theme-d2 w3-top ">
   <div className="w3-half">
     <div className="w3-bar">
       <a href="https://adysenlab.github.io/" title="Dev ops page" className="w3-bar-item w3-button w3-left"><i className="fas fa-chalkboard"></i></a>

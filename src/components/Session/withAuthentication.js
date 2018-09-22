@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { firebase } from '../../firebase';
 
+// checks for the authenticity to avail to userage of radii
 const withAuthentication = (Component) => {
   class WithAuthentication extends React.Component {
     componentDidMount() {

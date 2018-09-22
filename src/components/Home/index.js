@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import withAuthorization from '../Session/withAuthorization';
-import DataCard from './templates/Card'
+import DataCard from './templates/DataCard'
 
 
 
@@ -18,7 +18,7 @@ import {
 class HomePage extends Component {
   componentWillMount() {
     //const { getPosts } = this.props;
-     this.props.getUserLogs(this.props.authUser.email);
+     this.props.getUserLogs();
      this.props.getFeedDocklets(0);
      this.props.assemblageFeedDockletAction(0);
     // db.onceGetPosts().then(snapshot =>
@@ -47,7 +47,7 @@ class HomePage extends Component {
      
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">Welcome {this.props.authUser.displayName}</h4>
+         <h4 class="w3-center">Welcome {}</h4>
            
          <p class="w3-center"><img class="w3-circle" alt="Avatar" /></p>
          <hr/>
@@ -162,7 +162,12 @@ class HomePage extends Component {
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
       </div>
-      
+      {
+        this.props.docklets.map(app =>
+                                  <DataCard app = {app}/>
+              )
+      }
+        
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br/>
         <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right"  />
         <span class="w3-right w3-opacity">16 min</span>
@@ -235,14 +240,7 @@ class HomePage extends Component {
 
 </div>
 <br/>
-        
-      {
-        this.props.docklets.map(app =>
-                                  <DataCard app = {app}/>
-              )
-      }
-        
-        <div class="w3-container w3-theme-d4">
+<div class="w3-container w3-theme-d4">
     <p class="w3-large" >Radii Labs Pvt. Ltd. an enterprice of <a href=" https://adysenlab.github.io/ ">Adysenlab</a>
     </p>
     </div>

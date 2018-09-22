@@ -5,19 +5,19 @@ import { withRouter } from 'react-router-dom';
 
 import { firebase } from '../../firebase';
 import * as routes from '../../constants/routes';
-
+import SignInModal from '../SignIn'
 const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
         if (!condition(authUser)) {
-          this.props.history.push(routes.LANDING);
+          console.log('user not authenticated ... please sign in')
         }
       });
     }
 
     render() {
-      return this.props.authUser ? <Component /> : null;
+      return this.props.authUser ? <Component /> : (null) ;
     }
   }
 
