@@ -11,7 +11,7 @@ import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import HomePage from '../Home';
 import ExplorerView from '../Explorer'
-
+import SignIn from '../SignIn'
 import withAuthentication from '../Session/withAuthentication';
 import * as routes from '../../constants/routes';
 
@@ -29,6 +29,7 @@ const App = () =>
         <Route exact path={routes.LANDING} component={() => <LandingPage />} />
           <Route exact path={routes.HOME} component={() => <HomePage />} />
           <Route path={routes.MEDIA} component={ExplorerView} />
+          <Route exact path={routes.LOGIN} component= {SignIn} />
        </div>
     </div>
   </Router>
