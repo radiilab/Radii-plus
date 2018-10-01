@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //import SignOut from '../SignOut';
 import * as routes from '../../constants/routes';
 import { auth } from '../../firebase'
-
+import { Redirect } from 'react-router-dom';
 
 import { 
 userLogoutAction
@@ -45,8 +45,8 @@ const NavigationAuth = () =>
   </a>
   </div>
   <div class="w3-col s3">
-      <Link to={routes.HOME} className="w3-bar-item w3-button w3-left">
-      HOME
+      <Link to='media/2014' className="w3-bar-item w3-button w3-left">
+      Media
       </Link>
   </div>
   <div className="w3-col s3">
@@ -54,7 +54,8 @@ const NavigationAuth = () =>
 
        onClick= {() => {
         auth.doSignOut().then(()=>{
-           console.log("logout done")
+           console.log("logout done");
+           <Redirect to={routes.LOGIN} />
         }).catch(error => {
             console.log("Sign-out error");
         })}
@@ -81,7 +82,7 @@ const NavigationNonAuth = () =>
   <div class="w3-half">
     <div class="w3-bar ">
       
-      <a href={routes.LANDING} title="main page"class="w3-bar-item w3-button w3-right"><i class="fas fa-hands"></i></a>
+      <Link to={routes.LANDING} title="main page" class="w3-bar-item w3-button w3-right"><i className="fas fa-hands"></i></Link>
     </div>
 
   </div>

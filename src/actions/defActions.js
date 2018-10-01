@@ -62,3 +62,8 @@ export function userLogoutAction(){
     dispatch({type:'RESET_POST_STATE'})
   }
 }
+export function resetHomeAction(){
+  return (dispatch, getState) => {
+    dispatch({type:'RESET_POST_STATE'})
+  }
+}

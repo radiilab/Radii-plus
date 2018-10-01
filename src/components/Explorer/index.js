@@ -5,8 +5,12 @@ export default class ExplorerView extends React.Component{
   }
 
 	 render(){
+    const pageStyle = {
+    'maxWidth':'1400px',
+    'marginTop':'80px'
+  }
    		return(
-  <div className="w3-container "  >
+  <div className="w3-container w3-content" style= {pageStyle} >
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">

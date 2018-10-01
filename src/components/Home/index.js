@@ -4,14 +4,15 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import withAuthorization from '../Session/withAuthorization';
 import DataCard from './templates/DataCard'
-
-
+import { Redirect } from 'react-router-dom';
+import * as routes from '../../constants/routes';
 
 import { 
   getUserLogs,
    getProjects,
    getFeedDocklets,
-   assemblageFeedDockletAction
+   assemblageFeedDockletAction,
+   resetHomeAction
   } from '../../actions/defActions'
 
 
@@ -24,9 +25,14 @@ class HomePage extends Component {
     // db.onceGetPosts().then(snapshot =>
     //   onSetPosts(snapshot.data())
     // );
+
+    
   }
 
- 
+ componentWillUnmount(){
+  // all the post arrays have to be cleaned
+  this.props.resetHomeAction();
+ }
   render() {
     const { posts } = this.props;
     
@@ -272,7 +278,8 @@ function mapDispatchToProps(dispatch){
     getProjects,
     getUserLogs,
     getFeedDocklets,
-    assemblageFeedDockletAction 
+    assemblageFeedDockletAction ,
+    resetHomeAction
 }, dispatch);
 }
 

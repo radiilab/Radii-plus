@@ -6,22 +6,17 @@ import withAuthorization from '../Session/withAuthorization'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
-import {  Redirect } from 'react-router-dom';
+import {  Redirect, Link } from 'react-router-dom';
 
 const style = {
   'max-width':'1400px',
   'margin-top':'80px'
 }
-
-
-export default class LandingPage extends React.Component{
-
-// Do Later ... add sign in checks ONLY 
+class LoginButton extends React.Component{
 
 handleGoogleSignin = (event) => {
   auth.doGoogleSignIn().then( ()=>{
     // redirect to the home route
-    <Redirect to={routes.HOME} />
 
   }).catch( (reason)=> {
     console.log("error login :: "+ reason);
@@ -29,14 +24,44 @@ handleGoogleSignin = (event) => {
    
  }
 
+  render(){
+    return(
+      <button className="w3-button w3-black w3-padding-large w3-large w3-margin-top" 
+    onClick={this.handleGoogleSignin.bind(this)}>Login With Google</button>
+      )
+  }
+}
+
+class GoToHome extends React.Component{
+  render(){
+    return(
+    <Link className="w3-button w3-black w3-padding-large w3-large w3-margin-top" 
+    to={routes.HOME}>{this.props.user.displayName}</Link>
+      );
+  }
+}
+ class LandingPage extends React.Component{
+
+
+
  render(){
+  
+   function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn!=null) {
+    return <GoToHome user={isLoggedIn}/>;
+  }
+  return <LoginButton />;
+}
+
    return(
     <div  >
 <div class="w3-container w3-pale-yellow w3-center" style={{"padding":"128px 16px"}} >
     <h1 class="w3-margin w3-jumbo">Radii Con-centre</h1>
     <p class="w3-xlarge">Enabling Your Sustainance</p>
-    <button className="w3-button w3-black w3-padding-large w3-large w3-margin-top" 
-    onClick={this.handleGoogleSignin}>Login With Google</button>
+    
+
+    <Greeting isLoggedIn={this.props.authUser} />
   </div>
   
   <div class="w3-row-padding w3-theme">
@@ -86,3 +111,9 @@ handleGoogleSignin = (event) => {
  }
 }
 
+const mapStateToProps = (state) => ({
+  authUser: state.sessionState.authUser,
+});
+
+
+export default connect(mapStateToProps)(LandingPage) ;
