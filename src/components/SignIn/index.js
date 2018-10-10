@@ -75,7 +75,7 @@ render(){
 
 
           <div class="imgcontainer">
-          <img src="images/future.jpg" alt="Avatar" class="avatar" />
+          <img src="images/logo.png" alt="Avatar" class="avatar" />
           </div>
 
           <div class="container">
