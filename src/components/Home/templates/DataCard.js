@@ -5,30 +5,44 @@ import { bindActionCreators } from 'redux';
 
 class DataCard extends React.Component{
     render(){
+        function PaintTittle(props){
+            if(props.tittle !=null){
+                return (<h4> {props.tittle} </h4>);
+            }else{
+                return ( <h4> untittled Post </h4>);
+            }
+        }
+        function PaintLink(props){
+            if(props.link !=null){
+                console.log('inside paint link')
+                    if (props.link.default != null) {
+                    return (
+                        <a  href ={props.link.default} className="w3-button w3-theme-d1 w3-margin-bottom">
+                        <i className="fa fa-thumbs-up"></i>
+                        Go to Link</a>
+                    );
+                    }else 
+                        return null;
+            }else{
+                return null;
+            }
+        }
         return (
             <div className="w3-container w3-card w3-white w3-round w3-margin"><br/>
-                <h4> {this.props.app.tittle} </h4>    
+                    <PaintTittle tittle={this.props.app.tittle} />
                 <hr className="w3-clear"/>
-            </div>
 
-                // <div className="embed-container">
-                // <iframe src={this.props.app.href} title={this.props.app.title} width="560" height="315" 
-                // frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
-                // </iframe>
-                //  </div>   
+            <PaintLink link= {this.props.app.link} />
+            
+            
+            </div>
+                 
             
                 
             
-            // <button type="button" 
-            // className="w3-button w3-theme-d1 w3-margin-bottom">
-            // <i className="fa fa-thumbs-up"></i>
-            //  Action 1</button> 
+            
 
 
-            // <button type="button" 
-            // className="w3-button w3-theme-d2 w3-margin-bottom">
-            // <i className="fa fa-comment"></i>
-            //   Action 2</button> 
             
         
         );

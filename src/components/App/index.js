@@ -29,7 +29,7 @@ const App = () =>
         <Route exact path={routes.LANDING} component={() => <LandingPage />} />
           <Route exact path={routes.HOME} component={() => <HomePage />} />
           <Route exact path={routes.MEDIA} component={ExplorerView} />
-          <Route exact path={routes.LOGIN} component= {SignIn} />
+          <Route exact path={routes.LOGIN} component= {() => <SignIn /> } />
        </div>
     </div>
   </Router>
