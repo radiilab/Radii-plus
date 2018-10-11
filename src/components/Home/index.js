@@ -6,11 +6,10 @@ import withAuthorization from '../Session/withAuthorization';
 import DataCard from './templates/DataCard'
 import { Redirect } from 'react-router-dom';
 import * as routes from '../../constants/routes';
+import BottomScrollListener from 'react-bottom-scroll-listener';
 
-import { 
-  getUserLogs,
+import {
    getProjects,
-   getFeedDocklets,
    assemblageFeedDockletAction,
    resetHomeAction
   } from '../../actions/defActions'
@@ -19,16 +18,16 @@ import {
 class HomePage extends Component {
   componentWillMount() {
     //const { getPosts } = this.props;
-     this.props.getUserLogs();
-     this.props.getFeedDocklets(0);
-     this.props.assemblageFeedDockletAction(0);
-    // db.onceGetPosts().then(snapshot =>
-    //   onSetPosts(snapshot.data())
-    // );
-
+    // get the next 3 docklets from the database server
+     this.props.assemblageFeedDockletAction(this.props.count);
     
   }
+    
 
+reachedBottomOfPage(event){
+  //update the ui with elements
+   this.props.assemblageFeedDockletAction(this.props.count);
+}
  componentWillUnmount(){
   // all the post arrays have to be cleaned
   this.props.resetHomeAction();
@@ -39,8 +38,13 @@ class HomePage extends Component {
     const pageStyle = {
       'maxWidth':'1400px',
       'marginTop':'80px'
-    }
-    
+    };
+    const today = new Date().toLocaleDateString('en-GB', {  
+      day : 'numeric',
+      month : 'short',
+      year : 'numeric'
+    })
+
     return (
       
       <div   >
@@ -53,72 +57,28 @@ class HomePage extends Component {
      
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">Welcome {}</h4>
+         <h4 class="w3-center">Welcome {this.props.authUser.displayName}</h4>
            
-         <p class="w3-center"><img class="w3-circle" alt="Avatar" /></p>
+         <p class="w3-center"><img src={this.props.authUser.photoURL} className='w3-image'/></p>
          <hr/>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+         <p><i class="fas fa-user-check w3-margin-right w3-text-theme"></i> {this.props.authUser.email}</p>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {today}</p>
         </div>
       </div>
       <br/>
-      
-      
-      <div class="w3-card w3-round">
-        <div class="w3-white">
-          <button  class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
-          <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
-          </div>
-          <button  class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
-          <div id="Demo2" class="w3-hide w3-container">
-            <p>Some other text..</p>
-          </div>
-          <button class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
-          <div id="Demo3" class="w3-hide w3-container">
-         <div class="w3-row-padding">
-         <br/>
-           <div class="w3-half">
-             <img src="/w3images/lights.jpg"class="w3-margin-bottom" />
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/nature.jpg"  class="w3-margin-bottom" />
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/mountains.jpg"  class="w3-margin-bottom" />
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/forest.jpg"  class="w3-margin-bottom" />
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/nature.jpg"  class="w3-margin-bottom" />
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/snow.jpg" class="w3-margin-bottom" />
-           </div>
-         </div>
-          </div>
-        </div>      
-      </div>
-      <br/>
-      
-       
+
+
       <div class="w3-card w3-round w3-white w3-hide-small">
         <div class="w3-container">
-          <p>Interests</p>
+          <p>Areas of work</p>
           <p>
-            <span class="w3-tag w3-small w3-theme-d5">News</span>
-            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-            <span class="w3-tag w3-small w3-theme">Games</span>
-            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
+            <span class="w3-tag w3-small w3-theme-d5">Quantum Computing</span>
+            <span class="w3-tag w3-small w3-theme-d4">Artificial Intelligence</span>
+            <span class="w3-tag w3-small w3-theme-d3">Machine Learning</span>
+            <span class="w3-tag w3-small w3-theme-d2">Networking</span>
+            <span class="w3-tag w3-small w3-theme-d1">Compiler</span>
+            <span class="w3-tag w3-small w3-theme">Internet Of things</span>
+            <span class="w3-tag w3-small w3-theme-l1">Blockchain</span>
           </p>
         </div>
       </div>
@@ -127,10 +87,10 @@ class HomePage extends Component {
 
       <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
         <span  class="w3-button w3-theme-l3 w3-display-topright">
-          <i class="fa fa-remove"></i>
+          <i class="fas fa-american-sign-language-interpreting"></i>
         </span>
         <p><strong>Hey!</strong></p>
-        <p>People are looking at your profile. Find out who.</p>
+        <p>We are not done yet with all the features somethings may go wrong but we will get it right</p>
       </div>
     
 
@@ -143,31 +103,19 @@ class HomePage extends Component {
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">Social Media template by w3.css</h6>
-              <p class="w3-border w3-padding">Status: Feeling Blue</p>
+              <h6 class="w3-opacity">Have some thing you want to share with us !!</h6>
+              <textarea class="w3-border w3-padding" placeholder= 'Status: Feeling Blue' style={{
+    float: "left",
+    width: "75%",
+    marginTop: "6px",
+}}></textarea> <br/>
               <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
             </div>
           </div>
         </div>
       </div>
       
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br/>
-        <img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" />
-        <span class="w3-right w3-opacity">1 min</span>
-        <h4>John Doe</h4><br/>
-        <hr class="w3-clear"/>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="w3-row-padding" >
-            <div class="w3-half">
-              <img src="/w3images/lights.jpg"  alt="Northern Lights" class="w3-margin-bottom" />
-            </div>
-            <div class="w3-half">
-              <img src="/w3images/nature.jpg"  alt="Nature" class="w3-margin-bottom" />
-          </div>
-        </div>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-      </div>
+
       {
         this.props.docklets.map(app =>
                                   <DataCard app = {app}/>
@@ -203,7 +151,7 @@ class HomePage extends Component {
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
           <p>Upcoming Events:</p>
-          <img src="/w3images/forest.jpg" alt="Forest" />
+          <img src="/images/forest.jpg" class='w3-image'alt="Event" />
           <p><strong>Holiday</strong></p>
           <p>Friday 15:00</p>
           <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
@@ -213,15 +161,15 @@ class HomePage extends Component {
       
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <p>Friend Request</p>
-          <img src="/w3images/avatar6.png" alt="Avatar" /><br/>
+          <p>Public poll</p>
+          <img src="/w3images/avatar6.png" alt="Shorts" /><br/>
           <span>Jane Doe</span>
           <div class="w3-row w3-opacity">
             <div class="w3-half">
               <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
             </div>
             <div class="w3-half">
-              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="far fa-window-close"></i></button>
             </div>
           </div>
         </div>
@@ -237,7 +185,7 @@ class HomePage extends Component {
         <p><i class="fa fa-bug w3-xxlarge"></i></p>
       </div>
       
-
+      <BottomScrollListener onBottom={this.reachedBottomOfPage.bind(this) } />
     </div>
     
 
@@ -247,7 +195,7 @@ class HomePage extends Component {
 </div>
 <br/>
 <div class="w3-container w3-theme-d4">
-    <p class="w3-large" >Radii Labs Pvt. Ltd. an enterprice of <a href=" https://adysenlab.github.io/ ">Adysenlab</a>
+    <p class="w3-large" >Radii Consortium an initiative of <a href=" https://adysenlab.github.io/ ">Diganto Tech Pvt. Ltd.</a>
     </p>
     </div>
       </div>
@@ -255,20 +203,10 @@ class HomePage extends Component {
     );
   }
 }
-// class UserList extends React.Component{
-//   render(){
-//     return(
-//       <div >
-
-//       <Postings postings={this.props.users}/>
-
-//       </div>
-//     );
-//   }
-// }
 
 const mapStateToProps = (state) => ({
   docklets: state.postState.docklets,
+  count: state.postState.LoadCount,
   user: state.userState,
   authUser: state.sessionState.authUser,
 });
@@ -276,10 +214,8 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     getProjects,
-    getUserLogs,
-    getFeedDocklets,
     assemblageFeedDockletAction ,
-    resetHomeAction
+    resetHomeAction,
 }, dispatch);
 }
 

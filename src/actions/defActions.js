@@ -7,19 +7,19 @@ export function getProjects() {
     };
 }
 
-export function getUserLogs(username) {  
-    return {
-      type: "USER_LOGS_GET",  
-      payload : username  
-    };
-}
-export function getFeedDocklets(count) { 
-	console.log('get docklets') 
-    return {
-      type: "USER_GET_FEED_DOCKLETS",  
-      payload : count  
-    };
-}
+// export function getUserLogs(username) {  
+//     return {
+//       type: "USER_LOGS_GET",  
+//       payload : username  
+//     };
+// }
+// export function getFeedDocklets(count) { 
+// 	console.log('get docklets') 
+//     return {
+//       type: "USER_GET_FEED_DOCKLETS",  
+//       payload : count  
+//     };
+// }
 
 /*
 get all the dockets from assemblage according to the action value
@@ -28,17 +28,19 @@ results from the compute
 */
 export function assemblageFeedDockletAction(someValue) {
     return (dispatch, getState) => {
-        dispatch({type : "DOCKLET_LOADING"});
+        dispatch({type : "DOCKLET_LOADING"}); // some network delay is essential for performance checks
         console.log('from assemblage');
-        firestore.AssembladgeFeedDockletRef.get().then(snapshot => {
+        firestore.AssembladgeFeedDockletRef.orderBy("tittle").startAfter(someValue).limit(3)
+                                  .get().then(snapshot => {
           snapshot.forEach(doc => {
         console.log("Parent Document ID: ", doc.id);
 
          firestore.AssembladgeFeedDockletRef.doc(doc.id).get()
           .then(snapshot => {
               console.log("Sub Document ID: ", doc.id);
+              doc.data.key=doc.id;
               console.log("Sub Document Data: ", doc.data());
-              dispatch({type : "DOCKLET_FOUND", payload : doc.data()})
+              dispatch({type : "DOCKLET_FOUND", payload : doc.data(), key : doc.id})
               
           })
           .catch(err => {
@@ -46,7 +48,7 @@ export function assemblageFeedDockletAction(someValue) {
             dispatch({type : "DOCKLET_FAILED", error : err})
           })
         }
-        //action.payload = userInfo.data(),
+        
         
         )
         }).catch(error => {

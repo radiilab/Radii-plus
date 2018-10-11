@@ -45,14 +45,15 @@ const NavigationAuth = () =>
   </a>
   </div>
   <div class="w3-col s3">
-      <Link to='media/2014' className="w3-bar-item w3-button w3-left">
-      Media
+      <Link to={routes.HOME} className="w3-bar-item w3-button w3-left">
+      <i class="fas fa-address-card" ></i>
       </Link>
   </div>
   <div className="w3-col s3">
       <a href="#" 
 
-       onClick= {() => {
+       onClick= {
+        () => {
         auth.doSignOut().then(()=>{
            console.log("logout done");
            <Redirect to={routes.LOGIN} />
@@ -61,8 +62,8 @@ const NavigationAuth = () =>
         })}
        }
 
-       class="w3-col s3"
-       ><i class="fas fa-hand-point-down" title="Options"></i></a>
+       class="w3-bar-item w3-button" title="Options"
+       ><i class="fas fa-hand-point-down" ></i></a>
     </div>
 </div>
 
