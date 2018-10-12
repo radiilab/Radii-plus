@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +16,7 @@ render(){
         }
         function PaintLink(props){
             if(props.link !=null){
-                console.log('inside paint link')
+                
                     if (props.link.default != null) {
                     return (
                         <a  href ={props.link.default} className="w3-button w3-theme-d1 w3-margin-bottom">
@@ -33,7 +33,7 @@ render(){
             if(props.image !=null){
                     
                     return (
-                        <img  src ={props.image} className="w3-image">
+                        <img alt="Paint infographic" src ={props.image} className="w3-image">
                         </img>
                     );
             }else{
@@ -43,10 +43,10 @@ render(){
         function PaintSubTitle(props){
             var text = "";
             if (props.subtitle != null) {
-                var text = text +" " + props.subtitle.map((item, index) => {
+                 text = text +" " + props.subtitle.map((item, index) => {
                 return item; 
                 });
-                console.log(text);
+                
                 return text;
             } else {
                 return null;

@@ -1,6 +1,6 @@
 {
-  "short_name": "Labs",
-  "name": "AdySen lab productions",
+  "short_name": "Radii Concenter",
+  "name": "Radii School of Thoughts",
   "icons": [
     {
       "src": "favicon.png",
@@ -11,5 +11,6 @@
   "start_url": "./",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "orientation": "portrait"
 }

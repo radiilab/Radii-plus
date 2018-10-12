@@ -5,7 +5,6 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 import { firebase } from '../../firebase';
 import * as routes from '../../constants/routes';
-import SignInModal from '../SignIn'
 const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
     componentDidMount() {

@@ -2,16 +2,14 @@ import React from 'react';
 import { auth } from '../../firebase';
 
 import * as routes from '../../constants/routes';
-import withAuthorization from '../Session/withAuthorization'
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { bindActionCreators } from 'redux';
-import {  Redirect, Link } from 'react-router-dom';
 
-const style = {
-  'max-width':'1400px',
-  'margin-top':'80px'
-}
+import {  Link } from 'react-router-dom';
+
+// const style = {
+//   'max-width':'1400px',
+//   'margin-top':'80px'
+// }
 class LoginButton extends React.Component{
 
 handleGoogleSignin = (event) => {
@@ -58,7 +56,7 @@ class GoToHome extends React.Component{
     <div  >
 <div class="w3-container w3-pale-yellow w3-center" style={{"padding":"128px 16px"}} >
     <h1 class="w3-margin w3-jumbo">Radii Con-centre</h1>
-    <p class="w3-xlarge">Enabling Your Sustainance</p>
+    <p class="w3-xlarge">Sustainance. Personified.</p>
     
 
     <Greeting isLoggedIn={this.props.authUser} />
@@ -68,7 +66,7 @@ class GoToHome extends React.Component{
   
   <div class="w3-third w3-section">
   <div class="w3-card-4">
-  <img src="images/future.jpg" style={{"width":"100%"}}/>
+  <img src="images/future.jpg" alt="read the docs" style={{"width":"100%"}}/>
   <div class="w3-container w3-white">
   <h4>Not Available</h4>
   <p>The Cinque Terre (five lands) is a portion of the Italian Riviera. The coastline with five villages: Monterosso, Vernazza, Corniglia, Manarola, and Riomaggiore
@@ -79,7 +77,7 @@ class GoToHome extends React.Component{
   
   <div class="w3-third w3-section">
   <div class="w3-card-4">
-  <img src="images/atomics.jpg" style={{"width":"100%"}} />
+  <img src="images/atomics.jpg" style={{"width":"100%"}} alt="read the docs"/>
   <div class="w3-container w3-white">
   <h4>Not Available</h4>
   <p>Monterosso al Mare is located at the center of a small natural gulf, protected by a small artificial reef,
@@ -90,7 +88,7 @@ class GoToHome extends React.Component{
   
   <div class="w3-third w3-section">
   <div class="w3-card-4">
-  <img src="images/success.jpg" style={{"width":"100%"}} />
+  <img src="images/success.jpg" alt="read the docs" style={{"width":"100%"}} />
   <div class="w3-container w3-white">
   <h4>Not Available</h4>
   <p>Vernazza is another of the five towns in the region. Vernazza is the fourth town heading north. It has no car traffic, and is one of the truest
@@ -102,7 +100,7 @@ class GoToHome extends React.Component{
   </div>
   
   <div class="w3-container w3-theme-d4">
-  <p class="w3-large">Radii Labs Pvt. Ltd. an enterprice of <a href=" https://adysenlab.github.io/ ">Adysenlab</a>
+  <p class="w3-large">Radii Con-centre is an initiative of Diganto Tech Pvt. Ltd.
   </p>
   </div>
 </div>

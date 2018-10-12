@@ -33,18 +33,18 @@ export function assemblageFeedDockletAction(someValue) {
         firestore.AssembladgeFeedDockletRef.orderBy("tittle").startAfter(someValue).limit(3)
                                   .get().then(snapshot => {
           snapshot.forEach(doc => {
-        console.log("Parent Document ID: ", doc.id);
+        //console.log("Parent Document ID: ", doc.id);
 
          firestore.AssembladgeFeedDockletRef.doc(doc.id).get()
           .then(snapshot => {
-              console.log("Sub Document ID: ", doc.id);
+              //console.log("Sub Document ID: ", doc.id);
               doc.data.key=doc.id;
-              console.log("Sub Document Data: ", doc.data());
+              //console.log("Sub Document Data: ", doc.data());
               dispatch({type : "DOCKLET_FOUND", payload : doc.data(), key : doc.id})
               
           })
           .catch(err => {
-            console.log("Error getting sub-collection documents", err);
+            //console.log("Error getting sub-collection documents", err);
             dispatch({type : "DOCKLET_FAILED", error : err})
           })
         }
@@ -52,7 +52,7 @@ export function assemblageFeedDockletAction(someValue) {
         
         )
         }).catch(error => {
-          console.log(error)
+          //console.log(error)
           dispatch({type : "DOCKLET_FAILED", error : error})
         }
         )   

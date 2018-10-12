@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Link, Redirect} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
@@ -12,9 +12,9 @@ import * as routes from '../../constants/routes';
   
 
 
-const updateByPropertyName = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
+// const updateByPropertyName = (propertyName, value) => () => ({
+//   [propertyName]: value,
+// });
 
 
 class LoginButton extends React.Component{
@@ -50,15 +50,15 @@ class GoToHome extends React.Component{
 class SignIn extends React.Component {
 
 componentWillReceiveProp(){
-  console.log(this.props);
+  
 }
 componentWillUpdate(){
-  console.log(this.props);
+
 }
 render(){
 
    function Greeting(props) {
-    console.log('greeting function in sign in :: '+ props.isLoggedIn)
+    
   const isLoggedIn = props.isLoggedIn;
   if (isLoggedIn!=null) {
     return <GoToHome user={isLoggedIn}/>;
@@ -67,31 +67,34 @@ render(){
   return <LoginButton />;
 
 }
-
+const pageStyle = {
+      'maxWidth':'1400px',
+      'marginTop':'80px'
+    };
      return (
 
-        <div >
-
-      <h2>You must log in to view the page at </h2>
-      <p>Resize the browser window to see the responsive effect. 
-      When the screen is less than 650px wide, make the two columns 
-      stack on top of each other instead of next to each other.</p>
+        <div class="w3-container w3-content" style= {pageStyle} >
 
 
+
+        <div class="w3-panel w3-leftbar w3-sand">
+        <p class="w3-xxlarge w3-serif"><i>"Make it as simple as possible, but not simpler."</i></p>
+        <p>Albert Einstein</p>
+        </div>
           <div class="imgcontainer">
           <img src="images/logo.png" alt="Avatar" class="avatar" />
           </div>
 
           <div class="w3-center">
 
-            { console.log('greeting  state :: '+ this.props.authUser)}
+      
             
             <Greeting isLoggedIn={this.props.authUser} />
             <br/>
 
 
             <label>
-            <Link to="routes.TERMS" name="T&C"> Terms of Service </Link>
+            <Link to="#" name="T&C"> Terms of Service </Link>
             </label>
           </div>
         
@@ -103,7 +106,6 @@ render(){
 }
 }
 const mapStateToProps = (state) => (
-  console.log('state', state),
 {
 
   authUser: state.sessionState.authUser

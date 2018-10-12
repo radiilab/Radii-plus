@@ -15,7 +15,7 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.jpg">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -34,14 +34,14 @@
 
   gtag('config', 'UA-123737170-1');
 </script>
-
+  <link rel="icon" sizes="192x192" href="/logo.png">
   <link rel="stylesheet" href="css/w3.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/amber.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <link rel="stylesheet" href="css/amber.css">
-  <title>Radii School of Thoughts</title>
+  <title>Radii Concenter</title>
 </head>
 
 <body>
@@ -50,7 +50,9 @@
   </noscript>
 
   <div class="bgimg  w3-theme-light">
-
+    <div style="display: none;" id="btnInstallPWA">
+      <p><button class="w3-button w3-block w3-black">Intall Radii Lite</button></p>
+    </div>
     <div>
       <div id="root"></div>
     </div>
@@ -71,6 +73,32 @@
 
 
 </body>
+<script type="text/javascript">
+  let deferredPrompt;
 
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  btnInstallPWA.style.display = 'block';
+});
+btnInstallPWA.addEventListener('click', (e) => {
+  // hide our user interface that shows our A2HS button
+  btnInstallPWA.style.display = 'none';
+  // Show the prompt
+  deferredPrompt.prompt();
+  // Wait for the user to respond to the prompt
+  deferredPrompt.userChoice
+    .then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+    });
+});
+</script>
 </html>
 
