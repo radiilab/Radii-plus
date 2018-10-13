@@ -188,7 +188,7 @@ setTimeout(function() {
         <p><i class="fa fa-bug w3-xxlarge"></i></p>
       </div>
       
-      <BottomScrollListener onBottom={this.reachedBottomOfPage.bind(this) } />
+      <BottomScrollListener offset={300} onBottom={this.reachedBottomOfPage.bind(this) } />
     </div>
     
 

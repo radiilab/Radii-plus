@@ -19,7 +19,7 @@ render(){
                 
                     if (props.link.default != null) {
                     return (
-                        <a  href ={props.link.default} className="w3-button w3-theme-d1 w3-margin-bottom">
+                        <a  target="_blank" href ={props.link.default} className="w3-button w3-theme-d1 w3-margin-bottom">
                         <i class="fas fa-arrow-alt-circle-right"></i>
                         Read more</a>
                     );

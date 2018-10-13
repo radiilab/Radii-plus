@@ -4,7 +4,6 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 // import { create } from 'domain';
 // add Random uuid generator support for the new users
-const uuidv4 = require('uuid/v4');
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -18,24 +17,32 @@ exports.onNewUserLogin = functions.auth.user().onCreate(function (event) {
     // Get the uid and display name of the newly created user.
     const mailid = event.email;
     const displayName = event.displayName;
+    const uuid = event.uid;
     // Send a welcome email to the newly created user.
     // The sendEmail() method is left as an exercise to the reader.
-    createNewUserRecords(mailid, displayName);
+    createNewUserRecords(mailid, displayName, uuid);
+    // wait till the function ends executing 
+    return;
 });
-function createNewUserRecords(uid, displayName) {
+function createNewUserRecords(mail, displayName, uuid) {
     // Create a reference to the SF doc.
-    const IamDocRef = admin.firestore().doc('users/' + displayName);
+    const IamDocRef = admin.firestore().doc('users/' + mail);
     admin.firestore().runTransaction(function (transaction) {
         // This code may get re-run multiple times if there are conflicts.
         return transaction.get(IamDocRef).then(function (IamDoc) {
             if (!IamDoc.exists) {
                 console.log("a new user roasted" + displayName);
                 const newUser = {
-                    uuid: uuidv4(),
-                    email: uid,
+                    uid: uuid,
+                    email: mail,
                     name: displayName,
-                    LastSeen: new Date,
+                    LastSeen: new Date().toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric'
+                    }),
                     FCM: "null",
+                    isDeveloper: "false"
                 };
                 transaction.set(IamDocRef, newUser);
             }
@@ -46,4 +53,10 @@ function createNewUserRecords(uid, displayName) {
         console.log("Transaction failed: ", error);
     });
 }
+/*
+
+load all the components from the container and deploy them to the cloud fuction as is
+
+@adysenlab DEVELOPMENT VERSION ONLY
+*/
 //# sourceMappingURL=index.js.map
