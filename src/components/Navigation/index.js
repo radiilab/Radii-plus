@@ -34,7 +34,7 @@ const Navigation = ({ authUser }) =>
 const NavigationAuth = () =>
 <div class="w3-row w3-padding w3-theme-d2 w3-black w3-top">
   <div class="w3-col s3">
-      <a href="https://adysenlab.github.io/" target="_blank" title=" devops page" className="w3-bar-item w3-button">
+      <a href="https://radii.in/" target="_blank" title=" devops page" className="w3-bar-item w3-button">
       <i className="fas fa-chalkboard"></i>
       </a>
     </div>
@@ -73,7 +73,7 @@ const NavigationNonAuth = () =>
 <div className="w3-row w3-padding w3-theme-d2 w3-top ">
   <div className="w3-half">
     <div className="w3-bar">
-      <a href="https://adysenlab.github.io/" title="Dev ops page" className="w3-bar-item w3-button w3-left"><i className="fas fa-chalkboard"></i></a>
+      <a href="https://radii.in/" title="Dev ops page" className="w3-bar-item w3-button w3-left"><i className="fas fa-chalkboard"></i></a>
     </div>
   </div>
 
