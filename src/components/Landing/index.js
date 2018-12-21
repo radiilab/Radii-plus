@@ -100,7 +100,7 @@ class GoToHome extends React.Component{
   </div>
   
   <div class="w3-container w3-theme-d4">
-  <p class="w3-large">Radii Con-centre is an initiative of Diganto Tech Pvt. Ltd.
+  <p class="w3-large">Radii Plus is an undertaking of Radii Corporation
   </p>
   </div>
 </div>
